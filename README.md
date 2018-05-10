@@ -48,7 +48,6 @@ Você pode contribuir com código-fonte em nossa página no  [GitHub](#). Caso n
 
  - É necessário possuir uma conta no  [4all](https://4all.com).
  - Ter instalado o plugin [WooCommerce](http://wordpress.org/plugins/woocommerce/).
- - Na maquina rodando o [WooCommerce](http://wordpress.org/plugins/woocommerce/) é preciso estar instalado o pacote [CURL](http://php.net/manual/pt_BR/book.curl.php).  
 
 ### Configurações do Plugin:
 

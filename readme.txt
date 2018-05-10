@@ -46,7 +46,6 @@ Você pode contribuir com código-fonte em nossa página no  [GitHub](#). Caso n
 
 * É necessário possuir uma conta no  4all.
 * Ter instalado o plugin WooCommerce.
-* Na maquina rodando o WooCommerce é preciso estar instalado o pacote CURL.
 
 = Configurações do Plugin: =
 
