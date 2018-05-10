@@ -6,7 +6,7 @@
    * Author:      4all, Thiago Siqueira
    * Version:     1.0.0
    * License:     GPLv2 or later
-   * Text Domain: woocommerce-4all
+   * Text Domain: pagamentos-digitais-4all
    *
    * 4all is free software: you can redistribute it and/or modify
    * it under the terms of the GNU General Public License as published by
