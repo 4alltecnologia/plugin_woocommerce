@@ -4,29 +4,27 @@
   {
 
     function request($url, $body) {
-      $curl = curl_init();
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => $this->environment . $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => json_encode($body),
-        CURLOPT_HTTPHEADER => array(
-          "Cache-Control: no-cache",
-          "Content-Type: application/json",
+
+      $args = array(
+        'body' => json_encode($body),
+        'timeout' => '30',
+        'redirection' => '5',
+        'httpversion' => '1.1',
+        'blocking' => true,
+        'headers' => array(
+          "Cache-Control" => "no-cache",
+          "Content-Type" => "application/json",
         ),
-      ));
-      $response = curl_exec($curl);
-      $err = curl_error($curl);
-      curl_close($curl);
-      if ($err) {
+        'cookies' => array()
+      );
+
+      $response = wp_remote_post( $this->environment . $url, $args );
+
+      if (is_wp_error($response)) {
         $error = array("error" => ["code" => "1024536985", "message" => "Unable to connect with 4all."]);
         return json_encode($error); 
       } else {
-        return $response;
+        return json_decode($response['body'], true);
       }
     }
 
@@ -51,7 +49,6 @@
       try {
         $body = array("merchantKey" => $this->merchantKey);
         $response = $this->request('requestVaultKey', $body);
-        $response = json_decode($response, true);
         return $response;
       } catch (HttpException $ex) {
         $error = array("error" => ["code" => "2154893201", "message" => "Could not validate card."]);
@@ -76,7 +73,6 @@
             ]
           );
         $response = $this->request('prepareCard', $body);
-        $response = json_decode($response, true);
         return $response;
       } catch (HttpException $ex) {
         $error = array("error" => ["code" => "4520198237", "message" => "Could not prepare the card."]);
@@ -102,7 +98,6 @@
           "autoCapture" => true
                     );
         $response = $this->request('createTransaction', $body);
-        $response = json_decode($response, true);
         if ($response["status"] !== 4) {
           if ($response["status"] === 0 || $response["status"] === 2 || $response["status"] === 3) {
 
@@ -127,17 +122,17 @@
               }
             }
             if ($canceled == true) {
-              $response = array("error" => ["code" => "3546982157", "message" => "Could not make payment."]);
+              $response = array("error" => ["code" => "3546982157", "message" => "Could not make payment. (3546982157)"]);
             } else {
               $response = array("error" => ["code" => "4793105861", "message" => "Error."]);
             }
           } else {
-            $response = array("error" => ["code" => "3546982157", "message" => "Could not make payment."]);
+            $response = array("error" => ["code" => "3546982158", "message" => "Could not make payment. (3546982158)"]);
           }
         }
         return $response;
       } catch (HttpException $ex) {
-        $error = array("error" => ["code" => "3546982157", "message" => "Could not make payment."]);
+        $error = array("error" => ["code" => "3546982159", "message" => "Could not make payment. (3546982159)"]);
         return $error;
       }
     }

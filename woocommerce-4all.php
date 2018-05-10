@@ -37,7 +37,7 @@
 
   function plugin_action_links( $links ) {
     $plugin_links   = array();
-    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Settings', 'woocommerce-4all' ) . '</a>';
+    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Configurações', 'woocommerce-4all' ) . '</a>';
 
     return array_merge( $plugin_links, $links );
 	}
