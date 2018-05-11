@@ -42,14 +42,39 @@
       * Payment fields.
       */
       public function payment_fields() {
-        echo  '<p>Name of the buyer (same as the card)</p>
-          <input type="text" name="cardholderName">
-          <p>Card number</p>
-          <input type="text" name="cardNumber">
-          <p>Expiration date</p>
-          <input type="text" placeholder="MM/YY" name="expirationDate">
-          <p>Security code</p>
-          <input type="text" name="securityCode">';
+        $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
+        $paymentMethods = $gateway_4all->getPaymentMethods();
+        $minInstallment = $paymentMethods['resume']['minInstallments'];
+        $maxInstallments = $paymentMethods['resume']['maxInstallments'];
+        
+        echo  '<p>Name of the buyer (same as the card)</p>';
+        echo  '<input type="text" name="cardholderName">';
+        echo  '<p>Card number</p>';
+        echo  '<input type="text" name="cardNumber">';
+        echo  '<p>Expiration date</p>';
+        echo  '<input type="text" placeholder="MM/YY" name="expirationDate">';
+        echo  '<p>Security code</p>';
+        echo  '<input type="text" name="securityCode">';
+        echo  '<p>Installment</p>';
+        echo '<select name="installment">';
+        for (;$minInstallment<=$maxInstallments;$minInstallment++) {
+          echo '<option value="'.$minInstallment.'">'.$minInstallment.'</option>';
+        }
+        echo '</select>';
+        echo '<script>';
+        echo '    document.querySelector(\'[name=expirationDate]\').addEventListener(\'keypress\', function(e) {';
+        echo '    var v = destroyMask(e.target.value);';
+        echo '        e.target.value = createMask(v);';
+        echo '    });';
+            
+        echo '    function createMask(string){';
+        echo "        return string.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d{2})$/, '$1$2');";
+        echo '    }';
+
+        echo '    function destroyMask(string){';
+        echo "        return string.replace(/\D/g,'').substring(0,3);";
+        echo '    }';
+        echo '</script>';
       }
 
       public function validate_fields()
@@ -171,8 +196,7 @@
       */
       public function process_payment( $order_id ) {
         $order = wc_get_order( $order_id );
-        $gateway_4all = new woocommerce_4all_gateway();
-
+        $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
         $metaData = [
           "cardData" => [
             "cardholderName" => $_REQUEST["cardholderName"],
@@ -180,11 +204,12 @@
             "expirationDate" => $_REQUEST["expirationDate"],
             "securityCode" => $_REQUEST["securityCode"]
             ],
+          "installment" => $_REQUEST['installment'],
           "total" => (int)$order->get_total() * 100,
           "metaId" => "" . $order_id
           ];
 
-        $tryPay = $gateway_4all->paymentFlow($this->gatewaySettings, $metaData);
+        $tryPay = $gateway_4all->paymentFlow($metaData);
 
         if ($tryPay["error"]) {
           wc_add_notice( __('Payment error: ', 'woothemes') . $tryPay["error"]["message"], 'error' );

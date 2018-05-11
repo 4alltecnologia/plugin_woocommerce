@@ -2,6 +2,10 @@
   
   class woocommerce_4all_gateway
   {
+    function __construct($gatewaySettings) {
+      $this->merchantKey = $gatewaySettings["merchantKey"];
+      $this->environment = $gatewaySettings["environment"];
+    }
 
     function request($url, $body) {
 
@@ -28,9 +32,7 @@
       }
     }
 
-    public function paymentFlow($gatewaySettings, $metaData) {
-      $this->merchantKey = $gatewaySettings["merchantKey"];
-      $this->environment = $gatewaySettings["environment"];
+    public function paymentFlow($metaData) {
       $this->cardData = $metaData["cardData"];
       $responseRequestVaultKey = $this->requestVaultKey();
       if ($responseRequestVaultKey["error"]) {
@@ -86,17 +88,17 @@
         $body = array(
           "merchantKey" => $this->merchantKey,
           "amount" => $metaData["total"],
-          "softDescriptor" => "Dr. Zeus Inc.",
           "metaId" => $metaData["metaId"],
           "overwriteMetaId" => true,
           "paymentMethod" => 
             [[
               "cardNonce" => $cardCredential["cardNonce"],
               "cardBrandId" => $cardCredential["brandId"],
-              "amount" => $metaData["total"]
+              "amount" => $metaData["total"],
+              "installment" => (int)$metaData["installment"]
             ]],
           "autoCapture" => true
-                    );
+        );
         $response = $this->request('createTransaction', $body);
         if ($response["status"] !== 4) {
           if ($response["status"] === 0 || $response["status"] === 2 || $response["status"] === 3) {
@@ -152,6 +154,21 @@
       } catch (HttpException $ex) {
         return false;
       }
+    }
+
+    function getPaymentMethods()
+    {
+      try {
+        $body = array(
+          "merchantKey" => $this->merchantKey,
+        );
+        $response = $this->request('getPaymentMethods', $body);
+        return $response;
+      } catch (HttpException $ex) {
+        $error = array("error" => ["code" => "1876416810", "message" => "Error on try get payment methods."]);
+        return $error;
+      }
+    
     }
 
     function getTransactionDetails($id)
