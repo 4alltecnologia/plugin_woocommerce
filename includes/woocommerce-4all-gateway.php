@@ -99,6 +99,19 @@
             ]],
           "autoCapture" => true
         );
+
+        if ($metaData["customer"]) {
+          $body["customerInfo"] = array(
+            "fullName" => $metaData["customer"]["fullName"],
+            "address" => $metaData["customer"]["address"],
+            "city" => $metaData["customer"]["city"],
+            "state" => $metaData["customer"]["state"],
+            "zipCode" => $metaData["customer"]["zipCode"],
+            "phoneNumber" => $metaData["customer"]["phoneNumber"],
+            "emailAddress" => $metaData["customer"]["emailAddress"]
+          );
+        }
+
         $response = $this->request('createTransaction', $body);
         if ($response["status"] !== 4) {
           if ($response["status"] === 0 || $response["status"] === 2 || $response["status"] === 3) {
