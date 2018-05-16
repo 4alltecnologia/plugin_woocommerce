@@ -191,6 +191,46 @@
         ) );
       } // close init_form_fields
 
+      public function add_customer(){
+
+        $data = [];
+
+        if ($_REQUEST["billing_first_name"] && $_REQUEST["billing_last_name"]) {
+          $fullName = $_REQUEST["billing_first_name"] . ' ' . $_REQUEST["billing_last_name"];
+          $data["fullName"] = $fullName;
+        }
+
+        if ($_REQUEST["billing_address_1"]) {
+          $data["address"] = $_REQUEST["billing_address_1"];
+        }
+
+        if ($_REQUEST["billing_city"]) {
+          $data["city"] = $_REQUEST["billing_city"];
+        }
+
+        if ($_REQUEST["billing_state"]) {
+          $data["state"] = $_REQUEST["billing_state"];
+        }
+
+        if ($_REQUEST["billing_postcode"]) {
+          $data["zipCode"] = $_REQUEST["billing_postcode"];
+        }
+
+        if ($_REQUEST["billing_phone"]) {
+          $data["phoneNumber"] = $_REQUEST["billing_phone"];
+        }
+
+        if ($_REQUEST["billing_email"]) {
+          $data["emailAddress"] = $_REQUEST["billing_email"];
+        }
+
+        if (sizeof($data) > 0 ) {
+          return $data;
+        }
+
+        return null;
+      }
+
       /*
       * Try make the payment
       */
@@ -208,6 +248,8 @@
           "total" => (int)$order->get_total() * 100,
           "metaId" => "" . $order_id
           ];
+
+        $metaData["customer"] = $this->add_customer();
 
         $tryPay = $gateway_4all->paymentFlow($metaData);
 
