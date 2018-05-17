@@ -42,39 +42,7 @@
       * Payment fields.
       */
       public function payment_fields() {
-        $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
-        $paymentMethods = $gateway_4all->getPaymentMethods();
-        $minInstallment = $paymentMethods['resume']['minInstallments'];
-        $maxInstallments = $paymentMethods['resume']['maxInstallments'];
-        
-        echo  '<p>Name of the buyer (same as the card)</p>';
-        echo  '<input type="text" name="cardholderName">';
-        echo  '<p>Card number</p>';
-        echo  '<input type="text" name="cardNumber">';
-        echo  '<p>Expiration date</p>';
-        echo  '<input type="text" placeholder="MM/YY" name="expirationDate">';
-        echo  '<p>Security code</p>';
-        echo  '<input type="text" name="securityCode">';
-        echo  '<p>Installment</p>';
-        echo '<select name="installment">';
-        for (;$minInstallment<=$maxInstallments;$minInstallment++) {
-          echo '<option value="'.$minInstallment.'">'.$minInstallment.'</option>';
-        }
-        echo '</select>';
-        echo '<script>';
-        echo '    document.querySelector(\'[name=expirationDate]\').addEventListener(\'keypress\', function(e) {';
-        echo '    var v = destroyMask(e.target.value);';
-        echo '        e.target.value = createMask(v);';
-        echo '    });';
-            
-        echo '    function createMask(string){';
-        echo "        return string.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d{2})$/, '$1$2');";
-        echo '    }';
-
-        echo '    function destroyMask(string){';
-        echo "        return string.replace(/\D/g,'').substring(0,3);";
-        echo '    }';
-        echo '</script>';
+        include('form-template.php');
       }
 
       public function validate_fields()

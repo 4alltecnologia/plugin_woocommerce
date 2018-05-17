@@ -1,0 +1,41 @@
+.payment_method_4all {
+
+}
+.payment_method_4all .form-row {
+  margin-bottom: 10px;
+}
+.payment_method_4all .form-row-installment {
+
+}
+.payment_method_4all .form-row-installment select {
+  border: 1px solid #DDD;
+  border-radius: 2px;
+  background: #f0f0f0;
+  display: inline-block;
+  width: auto;
+  cursor: pointer;
+  padding: 9px;
+  min-width: 50px;
+}
+.payment_method_4all .form-row-brands {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  padding: 6px 0;
+}
+.payment_method_4all .form-row-brands img {
+  display: inline-block;
+  vertical-align: middle;
+  filter: grayscale(100%);
+  opacity: .5;
+  width: auto;
+  height: auto;
+}
+.payment_method_4all .form-row-brands img.active {
+  filter: grayscale(0);
+  opacity: 1;
+}
+#payment .payment_methods .payment_method_4all  .form-row-brands img {
+  float: none;
+  margin: 1px 4px;
+}

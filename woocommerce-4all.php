@@ -48,5 +48,22 @@
     $methods[] = 'WC_Gateway_4all';
     return $methods;
   }
+
+  function woocommerce_4all_add_css() {
+    $basePluginName = plugin_basename(plugin_dir_path( __FILE__ ));
+    $styleUrl = plugins_url( $basePluginName . '/assets/css/frontend/4all-style.css');
+    wp_enqueue_style( 'woocommerce_4all_style', $styleUrl);
+  }
   
+  function woocommerce_4all_add_js() {
+    $basePluginName = plugin_basename(plugin_dir_path( __FILE__ ));
+    $scriptUrl = plugins_url( $basePluginName . '/assets/js/4all-scripts.js');
+    $cards = plugins_url( $basePluginName . '/assets/js/4all-credit-cards.js');
+    wp_enqueue_script( 'woocommerce_4all_script', $scriptUrl, array('jquery'));
+    wp_enqueue_script( 'woocommerce_4all_credit_cards', $cards, array('woocommerce_4all_script'));
+  }
+
+  add_action( 'wp_enqueue_scripts', 'woocommerce_4all_add_css' );
+  add_action( 'wp_footer', 'woocommerce_4all_add_js' );
+
   add_filter('woocommerce_payment_gateways', 'woocommerce_4all_add_gateway');
