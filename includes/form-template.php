@@ -24,6 +24,8 @@
   for ($i=0; $i < sizeof($paymentMethods["brands"]); $i++) { 
     array_push($brandsList, $paymentMethods["brands"][$i]["brandId"]);
   }
+
+  $brandsListString = implode(";", $brandsList);
 ?>
 
 <p class="form-row">
@@ -34,10 +36,11 @@
   <label>Card number</label>
   <input type="text" name="cardNumber" maxlength="200">
 </p>
+<input type="hidden" id="brandsList" value="<?php echo $brandsListString; ?>">
 <div class='form-row-brands'>
   <?php 
     for ($i=0; $i < sizeof($brandsList); $i++) { 
-      echo '<img src="' . $brands[$i] . '" id="brand-' . $i . '" class="">';
+      echo '<img src="' . $brands[$brandsList[$i]] . '" id="brand-' . $brandsList[$i] . '" class="">';
     }
   ?>
 </div>

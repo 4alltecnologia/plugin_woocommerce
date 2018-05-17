@@ -39,3 +39,7 @@
   float: none;
   margin: 1px 4px;
 }
+
+#payment .payment_methods .payment_method_4all .alert {
+  border: 0.5px solid #ff0000;
+}
