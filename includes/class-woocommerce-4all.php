@@ -219,8 +219,6 @@
 
         $metaData["customer"] = $this->add_customer();
 
-        die();
-
         $tryPay = $gateway_4all->paymentFlow($metaData);
 
         if ($tryPay["error"]) {

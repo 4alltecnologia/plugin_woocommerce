@@ -3,29 +3,34 @@
 
   $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
   $paymentMethods = $gateway_4all->getPaymentMethods();
+  $nonePaymentMethods = true; //variavel para o caso do merchant ainda nao ter nenhuma affiliation cadastrada
 
-  $brandsList = [];
+  if ($paymentMethods) {
+    $brandsList = [];
 
-  $brands = [
-    "https://4all.com/brands/visa.png", 
-    "https://4all.com/brands/mastercard.png",
-    "https://4all.com/brands/diners.png", 
-    "https://4all.com/brands/elo.png", 
-    "https://4all.com/brands/amex.png", 
-    "https://4all.com/brands/discover.png", 
-    "https://4all.com/brands/aura.png", 
-    "https://4all.com/brands/jcb.png", 
-    "https://4all.com/brands/hipercard.png", 
-    "https://4all.com/brands/maestro.png", 
-    "https://4all.com/brands/4-all.png", 
-    "https://4all.com/brands/ticket.png"
-  ];
+    //a ordem das imagens esta de acordo com os id's retornados do gateway correspondendo a imagem
+    $brands = [
+      "https://4all.com/brands/visa.png", 
+      "https://4all.com/brands/mastercard.png",
+      "https://4all.com/brands/diners.png", 
+      "https://4all.com/brands/elo.png", 
+      "https://4all.com/brands/amex.png", 
+      "https://4all.com/brands/discover.png", 
+      "https://4all.com/brands/aura.png", 
+      "https://4all.com/brands/jcb.png", 
+      "https://4all.com/brands/hipercard.png"
+    ];
 
-  for ($i=0; $i < sizeof($paymentMethods["brands"]); $i++) { 
-    array_push($brandsList, $paymentMethods["brands"][$i]["brandId"]);
+    for ($i=0; $i < sizeof($paymentMethods["brands"]); $i++) { 
+      //o -1 é necessario, pois o gateway retorna os id's de 1 para cima
+      array_push($brandsList, $paymentMethods["brands"][$i]["brandId"] -1);
+    }
+
+    $brandsListString = implode(";", $brandsList);
+  } else {
+    $nonePaymentMethods = true;
   }
 
-  $brandsListString = implode(";", $brandsList);
 ?>
 
 <p class="form-row">
@@ -34,13 +39,17 @@
 </p>
 <p class="form-row">
   <label>Card number</label>
-  <input type="text" name="cardNumber" maxlength="200">
+  <input type="text" name="cardNumber" maxlength="200" <?php if ($nonePaymentMethods) { echo 'class="disabled" disabled'; } ?>>
 </p>
 <input type="hidden" id="brandsList" value="<?php echo $brandsListString; ?>">
 <div class='form-row-brands'>
   <?php 
-    for ($i=0; $i < sizeof($brandsList); $i++) { 
-      echo '<img src="' . $brands[$brandsList[$i]] . '" id="brand-' . $brandsList[$i] . '" class="">';
+    if (!$nonePaymentMethods) {
+      for ($i=0; $i < sizeof($brandsList); $i++) { 
+        echo '<img src="' . $brands[$brandsList[$i]] . '" id="brand-' . $brandsList[$i] . '" class="">';
+      }
+    } else {
+      echo '<p>Não há formas de pagamento disponíveis</p>';
     }
   ?>
 </div>

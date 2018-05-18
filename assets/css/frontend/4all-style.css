@@ -43,3 +43,8 @@
 #payment .payment_methods .payment_method_4all .alert {
   border: 0.5px solid #ff0000;
 }
+
+#payment .payment_methods .payment_method_4all .disabled {
+  background-color: rgb(214, 214, 214);
+  cursor: not-allowed;
+}

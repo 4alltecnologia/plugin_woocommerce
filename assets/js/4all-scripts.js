@@ -15,13 +15,15 @@ var $ = jQuery;
     var ids = $("#brandsList").val();
     ids = ids.split(";");
 
+    errorCardNumber = false;
+
     if (number.length === 0) {
       $brands.find('.active').removeClass('active');
       $('[name=cardNumber]').removeClass('alert');
-    } else if (/^4/.test(number) && ids.includes("0")) { //visa
+    } else if (/^4/.test(number) && ids.includes("0")) { //VISA
       $brands.find('#brand-' + 0).addClass('active').siblings().removeClass('active');
       $('[name=cardNumber]').removeClass('alert');
-    } else if (/^(222[1-9]|22[3-9]|2[3-6]|27[0-1]|2720|5018|50[2-3]|506|5[6-8]|5|603689|639|6220|67)/.test(number) && ids.includes("1")) { //mastercard
+    } else if (/^(222[1-9]|22[3-9]|2[3-6]|27[0-1]|2720|5018|50[2-3]|506|5[6-8]|5|603689|639|6220|67)/.test(number) && ids.includes("1")) { //MASTERCARD
       $brands.find('#brand-' + 1).addClass('active').siblings().removeClass('active');
       $('[name=cardNumber]').removeClass('alert');
     } else if (/^(36|301|305|309|3[8-9])/.test(number) && ids.includes("2")) { //DINERS
@@ -45,20 +47,21 @@ var $ = jQuery;
     } else if (/^(384100|384140|384160|60)/.test(number) && ids.includes("8")) { //HIPERCARD
       $brands.find('#brand-' + 8).addClass('active').siblings().removeClass('active');
       $('[name=cardNumber]').removeClass('alert');
-    } else if (/^6033/.test(number) && ids.includes("11")) { //TICKET
-      $brands.find('#brand-' + 11).addClass('active').siblings().removeClass('active');
-      $('[name=cardNumber]').removeClass('alert');
-    } else if (/^6026/.test(number) && ids.includes("11")) { //TICKET
-      $brands.find('#brand-' + 11).addClass('active').siblings().removeClass('active');
-      $('[name=cardNumber]').removeClass('alert');
-    } else if (number.length > 11) {
-      $brands.find('.active').removeClass('active');
+    } else {
+      errorCardNumber = true;
+    }
+  }
+
+  function validateCard(){
+    if (errorCardNumber) {
+      $('.form-row-brands').find('.active').removeClass('active');
       $('[name=cardNumber]').addClass('alert');
     }
   }
 
   var expirationSelector = '.payment_method_4all [name=expirationDate]';
   var cardNumberSelector = '.payment_method_4all [name=cardNumber]';
+  var errorCardNumber = false;
 
   $context.on('keypress', expirationSelector, function(event) {
     var v = destroyMask(event.target.value);
@@ -68,6 +71,10 @@ var $ = jQuery;
   $context.on('keyup', cardNumberSelector, function (event) {
     var v = event.target.value;
     checkCardType(v, $('.form-row-brands'));
+  });
+
+  $context.on('focusout', cardNumberSelector, function () {
+    validateCard();
   });
 
 }(jQuery));
