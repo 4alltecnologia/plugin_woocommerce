@@ -3,7 +3,7 @@
 
   $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
   $paymentMethods = $gateway_4all->getPaymentMethods();
-  $nonePaymentMethods = true; //variavel para o caso do merchant ainda nao ter nenhuma affiliation cadastrada
+  $nonePaymentMethods = false; //variavel para o caso do merchant ainda nao ter nenhuma affiliation cadastrada
 
   if ($paymentMethods) {
     $brandsList = [];
