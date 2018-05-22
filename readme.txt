@@ -49,7 +49,7 @@ Você pode contribuir com código-fonte em nossa página no  [GitHub](#). Caso n
 
 = Configurações do Plugin: =
 
-Com o plugin instalado acesse o admin do WordPress e entre em "WooCommerce" > "Settings" > "Checkout" e configure as opção "Pagamentos digitais 4all" e habilite.
+Com o plugin instalado acesse o admin do WordPress e entre em "WooCommerce" > "Settings" > "Checkout" e configure as opção "Pagamentos Digitais 4all" e habilite.
 
 Preencha as opção de  MerchantKey  que você receber por e-mail após se cadastrar na 4all.
 
