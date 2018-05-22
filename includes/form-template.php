@@ -49,7 +49,7 @@
         echo '<img src="' . $brands[$brandsList[$i]] . '" id="brand-' . $brandsList[$i] . '" class="">';
       }
     } else {
-      echo '<p>Não há formas de pagamento cadastrados</p>';
+      echo '<p>Não há formas de pagamento cadastradas</p>';
     }
   ?>
 </div>
