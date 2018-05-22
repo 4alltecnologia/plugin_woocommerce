@@ -1,6 +1,6 @@
 <?php
   /**
-   * Plugin Name: Pagamentos digitais 4all
+   * Plugin Name: Pagamentos Digitais 4all
    * Plugin URI:  https://github.com/4alltecnologia/plugin_woocommerce.git
    * Description: Includes 4all as a payment gateway to WooCommerce.
    * Author:      4all, Thiago Siqueira
