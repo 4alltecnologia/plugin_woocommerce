@@ -7,6 +7,7 @@
    * Version:     1.0.0
    * License:     GPLv2 or later
    * Text Domain: pagamentos-digitais-4all
+   * Domain Path: /languages
    *
    * 4all is free software: you can redistribute it and/or modify
    * it under the terms of the GNU General Public License as published by
@@ -37,7 +38,7 @@
 
   function plugin_action_links( $links ) {
     $plugin_links   = array();
-    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Configurações', 'woocommerce-4all' ) . '</a>';
+    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Settings', 'woocommerce-4all' ) . '</a>';
 
     return array_merge( $plugin_links, $links );
 	}
@@ -62,6 +63,15 @@
     wp_enqueue_script( 'woocommerce_4all_script', $scriptUrl, array('jquery'));
     wp_enqueue_script( 'woocommerce_4all_credit_cards', $cards, array('woocommerce_4all_script'));
   }
+
+  /**
+   * Load the plugin text domain for translation.
+   */
+  function woocommerce_4all_plugin_textdomain() {
+    load_plugin_textdomain('pagamentos-digitais-4all', false, dirname(plugin_basename( __FILE__ )) . '/languages');
+  }
+
+	add_action( 'init', 'woocommerce_4all_plugin_textdomain');
 
   add_action( 'wp_enqueue_scripts', 'woocommerce_4all_add_css' );
   add_action( 'wp_footer', 'woocommerce_4all_add_js' );
