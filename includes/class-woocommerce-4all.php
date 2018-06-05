@@ -9,7 +9,7 @@
         $this->id = '4all';
         $this->has_fields = true;
         $this->method_title = '4all';
-        $this->method_description = 'Official 4all payment gateway for WooCommerce.';
+        $this->method_description = __('Official 4all payment gateway for WooCommerce.', 'woocommerce-4all');
         $this->icon = apply_filters( 'wc_gateway_4all_icon', plugins_url( 'assets/images/favicon-32x32.png', plugin_dir_path( __FILE__ ) ) );
 
         $this->init_form_fields();
@@ -138,7 +138,7 @@
             'merchantKey' => array(
               'title'             => __( 'MerchantKey', 'woocommerce-4all' ),
               'type'              => 'text',
-              'description'       => sprintf( __( 'Please enter your 4all MerchantKey. This is needed to process the payment.')),
+              'description'       => __( 'Please enter your 4all MerchantKey. This is needed to process the payment.'),
               'default'           => '',
               'custom_attributes' => array(
                 'required' => 'required',
@@ -148,7 +148,7 @@
             'environment' => array(
               'title'             => __( 'Server Endpoint', 'woocommerce-4all' ),
               'type'              => 'select',
-              'description'       => sprintf( __( 'URL of the service that will be used to make calls.')),
+              'description'       => __( 'URL of the service that will be used to make calls.'),
               'default'           => 'https://gateway.homolog.4all.com/',
               'options' => array(
                 'https://gateway.homolog.4all.com/' => 'https://gateway.homolog.4all.com/',

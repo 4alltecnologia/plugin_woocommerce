@@ -49,7 +49,7 @@
         echo '<img src="' . $brands[$brandsList[$i]] . '" id="brand-' . $brandsList[$i] . '" class="">';
       }
     } else {
-      echo '<p>'.__('Não há formas de pagamento cadastradas.', 'woocommerce-4all' ).'</p>';
+      echo '<p>'.__('There are no registered payment methods.', 'woocommerce-4all' ).'</p>';
     }
   ?>
 </div>

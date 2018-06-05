@@ -29,6 +29,8 @@
 
   function woocommerce_4all_init()
   {
+    load_plugin_textdomain('woocommerce-4all', false, dirname(plugin_basename( __FILE__ )) . '/languages/');
+
     if (!class_exists('WC_Payment_Gateway')) return;
 
     include_once('includes/class-woocommerce-4all.php');
@@ -63,15 +65,6 @@
     wp_enqueue_script( 'woocommerce_4all_script', $scriptUrl, array('jquery'));
     wp_enqueue_script( 'woocommerce_4all_credit_cards', $cards, array('woocommerce_4all_script'));
   }
-
-  /**
-   * Load the plugin text domain for translation.
-   */
-  function woocommerce_4all_plugin_textdomain() {
-    load_plugin_textdomain('pagamentos-digitais-4all', false, dirname(plugin_basename( __FILE__ )) . '/languages');
-  }
-
-	add_action( 'init', 'woocommerce_4all_plugin_textdomain');
 
   add_action( 'wp_enqueue_scripts', 'woocommerce_4all_add_css' );
   add_action( 'wp_footer', 'woocommerce_4all_add_js' );
