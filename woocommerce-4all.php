@@ -7,6 +7,7 @@
    * Version:     1.0.0
    * License:     GPLv2 or later
    * Text Domain: pagamentos-digitais-4all
+   * Domain Path: /languages
    *
    * 4all is free software: you can redistribute it and/or modify
    * it under the terms of the GNU General Public License as published by
@@ -28,6 +29,8 @@
 
   function woocommerce_4all_init()
   {
+    load_plugin_textdomain('woocommerce-4all', false, dirname(plugin_basename( __FILE__ )) . '/languages/');
+
     if (!class_exists('WC_Payment_Gateway')) return;
 
     include_once('includes/class-woocommerce-4all.php');
@@ -37,7 +40,7 @@
 
   function plugin_action_links( $links ) {
     $plugin_links   = array();
-    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Configurações', 'woocommerce-4all' ) . '</a>';
+    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Settings', 'woocommerce-4all' ) . '</a>';
 
     return array_merge( $plugin_links, $links );
 	}

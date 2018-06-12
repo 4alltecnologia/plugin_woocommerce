@@ -34,11 +34,11 @@
 ?>
 
 <p class="form-row">
-  <label>Name of the buyer (same as the card)</label>
+  <label><?=__('Name of the buyer (same as the card)', 'woocommerce-4all'); ?></label>
   <input type="text" name="cardholderName" maxlength="200">
 </p>
 <p class="form-row">
-  <label>Card number</label>
+  <label><?=__('Card number', 'woocommerce-4all' ); ?></label>
   <input type="text" name="cardNumber" maxlength="200" <?php if ($nonePaymentMethods) { echo 'class="disabled" disabled'; } ?>>
 </p>
 <input type="hidden" id="brandsList" value="<?php echo $brandsListString; ?>">
@@ -49,21 +49,21 @@
         echo '<img src="' . $brands[$brandsList[$i]] . '" id="brand-' . $brandsList[$i] . '" class="">';
       }
     } else {
-      echo '<p>Não há formas de pagamento cadastradas</p>';
+      echo '<p>'.__('There are no registered payment methods.', 'woocommerce-4all' ).'</p>';
     }
   ?>
 </div>
 <p class="form-row">
-  <label>Expiration date</label>
+  <label><?=__('Expiration date', 'woocommerce-4all' ); ?></label>
   <input type="text" placeholder="MM/YY" name="expirationDate" maxlength="200">
 </p>
 <p class="form-row">
-  <label>Security code</label>
+  <label><?=__('Security code', 'woocommerce-4all' ); ?></label>
   <input type="text" name="securityCode" maxlength="200">
 </p>
 
 <p class="form-row form-row-installment">
-  <label>Installment</label>
+  <label><?=__('Installment', 'woocommerce-4all' ); ?></label>
   <select name="installment">
 
   <?php
