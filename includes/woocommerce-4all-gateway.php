@@ -7,7 +7,7 @@
       $this->environment = $gatewaySettings["environment"];
     }
 
-    function request($url, $body) {
+    function request_4all($url, $body) {
 
       $args = array(
         'body' => json_encode($body),
@@ -32,25 +32,25 @@
       }
     }
 
-    public function paymentFlow($metaData) {
+    public function paymentFlow_4all($metaData) {
       $this->cardData = $metaData["cardData"];
-      $responseRequestVaultKey = $this->requestVaultKey();
+      $responseRequestVaultKey = $this->requestVaultKey_4all();
       if ($responseRequestVaultKey["error"]) {
         return $responseRequestVaultKey;
       }
-      $responsePrepareCard = $this->prepareCard($responseRequestVaultKey["accessKey"]);
+      $responsePrepareCard = $this->prepareCard_4all($responseRequestVaultKey["accessKey"]);
       if ($responsePrepareCard["error"]) {
         return $responsePrepareCard;
       }
-      $responseCreateTransaction = $this->createTransaction($responsePrepareCard, $metaData);
+      $responseCreateTransaction = $this->createTransaction_4all($responsePrepareCard, $metaData);
       return $responseCreateTransaction;
     }
 
-    function requestVaultKey()
+    function requestVaultKey_4all()
     {
       try {
         $body = array("merchantKey" => $this->merchantKey);
-        $response = $this->request('requestVaultKey', $body);
+        $response = $this->request_4all('requestVaultKey', $body);
         return $response;
       } catch (HttpException $ex) {
         $error = array("error" => ["code" => "2154893201", "message" => "Could not validate card."]);
@@ -58,7 +58,7 @@
       }
     }
     
-    function prepareCard($accessKey)
+    function prepareCard_4all($accessKey)
     {
       try {
         $this->cardData["expirationDate"] = str_replace("/", "", $this->cardData["expirationDate"]);
@@ -74,7 +74,7 @@
               "securityCode" => $this->cardData["securityCode"]
             ]
           );
-        $response = $this->request('prepareCard', $body);
+        $response = $this->request_4all('prepareCard', $body);
         return $response;
       } catch (HttpException $ex) {
         $error = array("error" => ["code" => "4520198237", "message" => "Could not prepare the card."]);
@@ -82,7 +82,7 @@
       }
     }
 
-    function createTransaction($cardCredential, $metaData)
+    function createTransaction_4all($cardCredential, $metaData)
     {
       try {
         $body = array(
@@ -112,13 +112,13 @@
           );
         }
 
-        $response = $this->request('createTransaction', $body);
+        $response = $this->request_4all('createTransaction', $body);
         if ($response["status"] !== 4) {
           if ($response["status"] === 0 || $response["status"] === 2 || $response["status"] === 3) {
 
             if ($response["status"] === 3) {
               sleep(9);
-              $details = $this->getTransactionDetails($response["transactionId"]);
+              $details = $this->getTransactionDetails_4all($response["transactionId"]);
 
               if (!$details["error"] && $details["status"] == 4) {
                 $response["status"] = $details["status"];
@@ -130,7 +130,7 @@
             $count = 0;
             while(true)
             {
-              $canceled = $this->cancelTransaction($response["transactionId"]);
+              $canceled = $this->cancelTransaction_4all($response["transactionId"]);
               $count++;
               if ($count = 3 || $canceled == true) {
                 break;
@@ -152,14 +152,14 @@
       }
     }
     
-    function cancelTransaction($id)
+    function cancelTransaction_4all($id)
     {
       try {
         $body = array(
           "merchantKey" => $this->merchantKey,
           "transactionId"=> $id 
         );
-        $response = $this->request('cancelTransaction', $body);
+        $response = $this->request_4all('cancelTransaction', $body);
         if ($response["error"]) {
           return false;
         }
@@ -169,13 +169,13 @@
       }
     }
 
-    function getPaymentMethods()
+    function getPaymentMethods_4all()
     {
       try {
         $body = array(
           "merchantKey" => $this->merchantKey,
         );
-        $response = $this->request('getPaymentMethods', $body);
+        $response = $this->request_4all('getPaymentMethods', $body);
         return $response;
       } catch (HttpException $ex) {
         $error = array("error" => ["code" => "1876416810", "message" => "Error on try get payment methods."]);
@@ -184,14 +184,14 @@
     
     }
 
-    function getTransactionDetails($id)
+    function getTransactionDetails_4all($id)
     {
       try {
         $body = array(
           "merchantKey" => $this->merchantKey,
           "transactionId"=> $id 
         );
-        $response = $this->request('getTransactionDetails', $body);
+        $response = $this->request_4all('getTransactionDetails', $body);
         return $response;
       } catch (HttpException $ex) {
         $error = array("error" => ["code" => "1876435810", "message" => "Error on try get transaction details."]);

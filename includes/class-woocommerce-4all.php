@@ -159,7 +159,7 @@
         ) );
       } // close init_form_fields
 
-      public function add_customer(){
+      public function add_customer_4all(){
 
         $data = [];
 
@@ -217,9 +217,9 @@
           "metaId" => "" . $order_id
           ];
 
-        $metaData["customer"] = $this->add_customer();
+        $metaData["customer"] = $this->add_customer_4all();
 
-        $tryPay = $gateway_4all->paymentFlow($metaData);
+        $tryPay = $gateway_4all->paymentFlow_4all($metaData);
 
         if ($tryPay["error"]) {
           wc_add_notice( __('Payment error: ', 'woothemes') . __($tryPay["error"]["message"], 'woocommerce-4all'), 'error' );

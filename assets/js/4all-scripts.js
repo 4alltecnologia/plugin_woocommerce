@@ -3,15 +3,15 @@ var $ = jQuery;
 (function($) {
   var $context = $('#order_review');
 
-  function createMask(string) {
+  function createMask_4all(string) {
     return string.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\d{2})(\d{2})$/, '$1$2');
   }
 
-  function destroyMask(string) {
+  function destroyMask_4all(string) {
     return string.replace(/\D/g, '').substring(0, 3);
   }
 
-  function checkCardType(number, $brands) {
+  function checkCardType_4all(number, $brands) {
     var ids = $("#brandsList").val();
     ids = ids.split(";");
 
@@ -52,7 +52,7 @@ var $ = jQuery;
     }
   }
 
-  function validateCard(){
+  function validateCard_4all(){
     if (errorCardNumber) {
       $('.form-row-brands').find('.active').removeClass('active');
       $('[name=cardNumber]').addClass('alert');
@@ -64,17 +64,17 @@ var $ = jQuery;
   var errorCardNumber = false;
 
   $context.on('keypress', expirationSelector, function(event) {
-    var v = destroyMask(event.target.value);
-    event.target.value = createMask(v);
+    var v = destroyMask_4all(event.target.value);
+    event.target.value = createMask_4all(v);
   });
 
   $context.on('keyup', cardNumberSelector, function (event) {
     var v = event.target.value;
-    checkCardType(v, $('.form-row-brands'));
+    checkCardType_4all(v, $('.form-row-brands'));
   });
 
   $context.on('focusout', cardNumberSelector, function () {
-    validateCard();
+    validateCard_4all();
   });
 
 }(jQuery));
