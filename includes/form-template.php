@@ -2,7 +2,7 @@
   include_once 'woocommerce-4all-gateway.php';
 
   $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
-  $paymentMethods = $gateway_4all->getPaymentMethods();
+  $paymentMethods = $gateway_4all->getPaymentMethods_4all();
   $nonePaymentMethods = false; //variavel para o caso do merchant ainda nao ter nenhuma affiliation cadastrada
 
   if ($paymentMethods) {
