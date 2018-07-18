@@ -18,6 +18,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#. Author of the plugin/theme
+msgid "4all, Thiago Siqueira"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Includes 4all as a payment gateway to WooCommerce."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/4alltecnologia/plugin_woocommerce.git"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Pagamentos Digitais 4all"
+msgstr ""
+
 #: includes/class-woocommerce-4all.php:12
 msgid "Official 4all payment gateway for WooCommerce."
 msgstr ""
