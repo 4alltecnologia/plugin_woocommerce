@@ -22,7 +22,7 @@ A 4all para WooCommerce é um checkout direto que será adicionado na tela de pa
 Compatível desde a versão 2.3.x até 2.6.x do WooCommerce.
 
 = Instalação =
-Confira o nosso guia de instalação e configuração da 4all na aba [Installation](https://br.wordpress.org/pluginspagamentos-digitais-4all/#installation).
+Confira o nosso guia de instalação e configuração da 4all na aba [Installation](#installation).
 
 = Dúvidas? =
 
