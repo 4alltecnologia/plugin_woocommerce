@@ -1,5 +1,5 @@
 # Pagamentos Digitais 4all.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright(C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pagamentos-digitais-4all package.
 # Thiago Souza thiago.souza@4all.com, 2018.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pagamentos-digitais-4all 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-19 08:49-0300\n"
+"POT-Creation-Date: 2018-08-01 16:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator:Thiago Souza thiago.souza@4all\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,11 @@ msgid "Official 4all payment gateway for WooCommerce."
 msgstr ""
 
 #: includes/class-woocommerce-4all.php:53
+#: includes/class-woocommerce-4all.php:58
+msgid "Card name"
+msgstr ""
+
+#: includes/class-woocommerce-4all.php:53
 #: includes/class-woocommerce-4all.php:64
 #: includes/class-woocommerce-4all.php:75
 #: includes/class-woocommerce-4all.php:85
@@ -50,6 +55,21 @@ msgstr ""
 #: includes/class-woocommerce-4all.php:79
 #: includes/class-woocommerce-4all.php:90
 msgid "is not a valide value."
+msgstr ""
+
+#: includes/class-woocommerce-4all.php:64
+#: includes/class-woocommerce-4all.php:69 includes/form-template.php:41
+msgid "Card number"
+msgstr ""
+
+#: includes/class-woocommerce-4all.php:75
+#: includes/class-woocommerce-4all.php:79 includes/form-template.php:57
+msgid "Expiration date"
+msgstr ""
+
+#: includes/class-woocommerce-4all.php:85
+#: includes/class-woocommerce-4all.php:90 includes/form-template.php:61
+msgid "Security code"
 msgstr ""
 
 #: includes/class-woocommerce-4all.php:109
@@ -116,20 +136,8 @@ msgstr ""
 msgid "Name of the buyer (same as the card)"
 msgstr ""
 
-#: includes/form-template.php:41
-msgid "Card number"
-msgstr ""
-
 #: includes/form-template.php:52
 msgid "There are no registered payment methods."
-msgstr ""
-
-#: includes/form-template.php:57
-msgid "Expiration date"
-msgstr ""
-
-#: includes/form-template.php:61
-msgid "Security code"
 msgstr ""
 
 #: includes/form-template.php:66
