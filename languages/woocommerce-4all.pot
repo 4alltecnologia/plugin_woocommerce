@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pagamentos-digitais-4all 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 16:18-0300\n"
+"POT-Creation-Date: 2018-08-15 10:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator:Thiago Souza thiago.souza@4all\n"
+"Last-Translator: Thiago Souza thiago.souza@4all\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -46,89 +46,99 @@ msgstr ""
 #: includes/class-woocommerce-4all.php:53
 #: includes/class-woocommerce-4all.php:64
 #: includes/class-woocommerce-4all.php:75
-#: includes/class-woocommerce-4all.php:85
+#: includes/class-woocommerce-4all.php:86
+#: includes/class-woocommerce-4all.php:96
 msgid "is a required field."
 msgstr ""
 
 #: includes/class-woocommerce-4all.php:58
 #: includes/class-woocommerce-4all.php:69
-#: includes/class-woocommerce-4all.php:79
+#: includes/class-woocommerce-4all.php:80
 #: includes/class-woocommerce-4all.php:90
+#: includes/class-woocommerce-4all.php:101
 msgid "is not a valide value."
 msgstr ""
 
 #: includes/class-woocommerce-4all.php:64
-#: includes/class-woocommerce-4all.php:69 includes/form-template.php:41
+#: includes/class-woocommerce-4all.php:69 
+#: includes/form-template.php:45
 msgid "Card number"
 msgstr ""
 
 #: includes/class-woocommerce-4all.php:75
-#: includes/class-woocommerce-4all.php:79 includes/form-template.php:57
+#: includes/class-woocommerce-4all.php:80
+msgid "Buyer CPF"
+msgstr ""
+
+#: includes/class-woocommerce-4all.php:86
+#: includes/class-woocommerce-4all.php:90
+#: includes/form-template.php:61
 msgid "Expiration date"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:85
-#: includes/class-woocommerce-4all.php:90 includes/form-template.php:61
+#: includes/class-woocommerce-4all.php:96
+#: includes/class-woocommerce-4all.php:101
+#: includes/form-template.php:65
 msgid "Security code"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:109
+#: includes/class-woocommerce-4all.php:120
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:112
+#: includes/class-woocommerce-4all.php:123
 msgid ""
 "If you do not already have 4all merchant account, <a href=\"https://"
 "autocredenciamento.4all.com\" target=\"_blank\">please register in "
 "Production</a>"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:117
+#: includes/class-woocommerce-4all.php:128
 msgid "Title:"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:119
+#: includes/class-woocommerce-4all.php:130
 msgid "Title of 4all Payment Gateway that users sees on Checkout page."
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:120
+#: includes/class-woocommerce-4all.php:131
 msgid "4all"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:125
+#: includes/class-woocommerce-4all.php:136
 msgid "Description:"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:127
+#: includes/class-woocommerce-4all.php:138
 msgid "Description of 4all Payment Gateway that users sees on Checkout page."
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:128
+#: includes/class-woocommerce-4all.php:139
 msgid "4all is a leading payment services provider."
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:133
+#: includes/class-woocommerce-4all.php:144
 msgid "Integration Settings"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:139
+#: includes/class-woocommerce-4all.php:150
 msgid "MerchantKey"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:141
+#: includes/class-woocommerce-4all.php:152
 msgid ""
 "Please enter your 4all MerchantKey. This is needed to process the payment."
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:149
+#: includes/class-woocommerce-4all.php:160
 msgid "Server Endpoint"
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:151
+#: includes/class-woocommerce-4all.php:162
 msgid "URL of the service that will be used to make calls."
 msgstr ""
 
-#: includes/class-woocommerce-4all.php:225
+#: includes/class-woocommerce-4all.php:239
 msgid "Payment error: "
 msgstr ""
 
@@ -136,11 +146,15 @@ msgstr ""
 msgid "Name of the buyer (same as the card)"
 msgstr ""
 
-#: includes/form-template.php:52
+#: includes/form-template.php:41
+msgid "CPF of the buyer"
+msgstr ""
+
+#: includes/form-template.php:56
 msgid "There are no registered payment methods."
 msgstr ""
 
-#: includes/form-template.php:66
+#: includes/form-template.php:70
 msgid "Installment"
 msgstr ""
 
