@@ -71,6 +71,17 @@
           $error = true;
         }
 
+        if (empty( $_REQUEST['buyerDocument'] )) {
+          wc_add_notice( '<strong>"' . __('Buyer CPF', 'woocommerce-4all') . '"</strong> ' . __( 'is a required field.', 'woocommerce-4all' ), 'error' );
+
+          $error = true;
+        } elseif (!preg_match('/([0-9])/', $_REQUEST['buyerDocument']) || strlen($_REQUEST['buyerDocument']) < 14 
+        || strlen($_REQUEST['buyerDocument']) > 14) {
+          wc_add_notice( '<strong>"' . __('Buyer CPF', 'woocommerce-4all') . '"</strong> ' . __( 'is not a valide value.', 'woocommerce-4all' ), 'error' );
+          
+          $error = true;
+        }
+
         if (empty( $_REQUEST['expirationDate'] )) {
           wc_add_notice( '<strong>"' . __('Expiration date', 'woocommerce-4all') . '"</strong> ' . __( 'is a required field.', 'woocommerce-4all' ), 'error' );
 
@@ -208,6 +219,7 @@
         $metaData = [
           "cardData" => [
             "cardholderName" => $_REQUEST["cardholderName"],
+            "buyerDocument" => $_REQUEST["buyerDocument"],
             "cardNumber" => $_REQUEST["cardNumber"],
             "expirationDate" => $_REQUEST["expirationDate"],
             "securityCode" => $_REQUEST["securityCode"]
@@ -217,7 +229,9 @@
           "metaId" => "" . $order_id
           ];
 
+        $findToReplace = array('.', '-');
         $metaData["customer"] = $this->add_customer_4all();
+        $metaData["customer"]["cpf"] = str_replace($findToReplace, '', $_REQUEST["buyerDocument"]);
 
         $tryPay = $gateway_4all->paymentFlow_4all($metaData);
 

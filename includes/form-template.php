@@ -38,6 +38,10 @@
   <input type="text" name="cardholderName" maxlength="200">
 </p>
 <p class="form-row">
+  <label><?=__('CPF of the buyer', 'woocommerce-4all'); ?></label>
+  <input type="text" name="buyerDocument" maxlength="14">
+</p>
+<p class="form-row">
   <label><?=__('Card number', 'woocommerce-4all' ); ?></label>
   <input type="text" name="cardNumber" maxlength="200" <?php if ($nonePaymentMethods) { echo 'class="disabled" disabled'; } ?>>
 </p>
