@@ -61,9 +61,7 @@
   function woocommerce_4all_add_js() {
     $basePluginName = plugin_basename(plugin_dir_path( __FILE__ ));
     $scriptUrl = plugins_url( $basePluginName . '/assets/js/4all-scripts.js');
-    $cards = plugins_url( $basePluginName . '/assets/js/4all-credit-cards.js');
     wp_enqueue_script( 'woocommerce_4all_script', $scriptUrl, array('jquery'));
-    wp_enqueue_script( 'woocommerce_4all_credit_cards', $cards, array('woocommerce_4all_script'));
   }
 
   add_action( 'wp_enqueue_scripts', 'woocommerce_4all_add_css' );

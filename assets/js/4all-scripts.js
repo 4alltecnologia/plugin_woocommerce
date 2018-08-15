@@ -11,6 +11,14 @@ var $ = jQuery;
     return string.replace(/\D/g, '').substring(0, 3);
   }
 
+  function createDocumentMask_4all(string) {
+    return string.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  }
+
+  function destroyDocumentMask_4all(string) {
+    return string.replace(/\D/g, '').substring(0, 11);
+  }
+
   function checkCardType_4all(number, $brands) {
     var ids = $("#brandsList").val();
     ids = ids.split(";");
@@ -61,11 +69,17 @@ var $ = jQuery;
 
   var expirationSelector = '.payment_method_4all [name=expirationDate]';
   var cardNumberSelector = '.payment_method_4all [name=cardNumber]';
+  var buyerDocument = '.payment_method_4all [name=buyerDocument]';
   var errorCardNumber = false;
 
   $context.on('keypress', expirationSelector, function(event) {
     var v = destroyMask_4all(event.target.value);
     event.target.value = createMask_4all(v);
+  });
+
+  $context.on('keypress', buyerDocument, function(event) {
+    var v = destroyDocumentMask_4all(event.target.value);
+    event.target.value = createDocumentMask_4all(v);
   });
 
   $context.on('keyup', cardNumberSelector, function (event) {

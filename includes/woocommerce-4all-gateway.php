@@ -103,6 +103,7 @@
         if ($metaData["customer"]) {
           $body["customerInfo"] = array(
             "fullName" => $metaData["customer"]["fullName"],
+            "cpf" => $metaData["customer"]["cpf"],
             "address" => $metaData["customer"]["address"],
             "city" => $metaData["customer"]["city"],
             "state" => $metaData["customer"]["state"],
