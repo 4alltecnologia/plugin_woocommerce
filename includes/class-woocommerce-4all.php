@@ -10,13 +10,12 @@
         $this->has_fields = true;
         $this->method_title = '4all';
         $this->method_description = __('Official 4all payment gateway for WooCommerce.', 'woocommerce-4all');
-        $this->icon = apply_filters( 'wc_gateway_4all_icon', plugins_url( 'assets/images/favicon-32x32.png', plugin_dir_path( __FILE__ ) ) );
+        $this->icon = apply_filters( 'wc_gateway_4all_icon', plugins_url( 'assets/images/PAGAMENTOS-DIGITAIS.png', plugin_dir_path( __FILE__ ) ) );
 
         $this->init_form_fields();
         $this->init_settings();
 
         $this->enabled = $this->settings['enabled'];
-        $this->title = $this->settings['title'];
         $this->description = $this->settings['description'];
         $this->merchantKey = $this->settings['merchantKey'];
         $this->environment = $this->settings['environment'];
@@ -122,14 +121,6 @@
                 'label'   => ' ',
                 'description' => __('If you do not already have 4all merchant account, <a href="https://autocredenciamento.4all.com" target="_blank">please register in Production</a>', 'woocommerce-4all'),
                 'default' => 'yes'
-            ),
-
-            'title' => array(
-                'title'       => __( 'Title:', 'woocommerce-4all' ),
-                'type'        => 'text',
-                'description' => __( 'Title of 4all Payment Gateway that users sees on Checkout page.', 'woocommerce-4all' ),
-                'default'     => __( '4all', 'woocommerce-4all' ),
-                'desc_tip'    => true,
             ),
 
             'description' => array(
