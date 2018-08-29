@@ -56,3 +56,5 @@ Preencha as opção de  MerchantKey  que você receber por e-mail após se cadas
 Você também terá que escolher o Server Endpoint, ele permite você fazer as chamadas para o ambiente de produção ou para o de homologação caso queira fazer alguns testes.
 
 Pronto, sua loja já pode receber pagamentos pela 4all.
+
+Observação: É aconselhavel não esconder as imagens da página de checkout, pois para disponibilizar um layout mais agradavel, nós apresentamos apenas nosso logo nessa página.
