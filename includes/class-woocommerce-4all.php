@@ -71,12 +71,12 @@
         }
 
         if (empty( $_REQUEST['buyerDocument'] )) {
-          wc_add_notice( '<strong>"' . __('Buyer CPF', 'woocommerce-4all') . '"</strong> ' . __( 'is a required field.', 'woocommerce-4all' ), 'error' );
+          wc_add_notice( '<strong>"' . __('CPF', 'woocommerce-4all') . '"</strong> ' . __( 'is a required field.', 'woocommerce-4all' ), 'error' );
 
           $error = true;
         } elseif (!preg_match('/([0-9])/', $_REQUEST['buyerDocument']) || strlen($_REQUEST['buyerDocument']) < 14 
         || strlen($_REQUEST['buyerDocument']) > 14) {
-          wc_add_notice( '<strong>"' . __('Buyer CPF', 'woocommerce-4all') . '"</strong> ' . __( 'is not a valide value.', 'woocommerce-4all' ), 'error' );
+          wc_add_notice( '<strong>"' . __('CPF', 'woocommerce-4all') . '"</strong> ' . __( 'is not a valide value.', 'woocommerce-4all' ), 'error' );
           
           $error = true;
         }
@@ -140,7 +140,7 @@
             'merchantKey' => array(
               'title'             => __( 'MerchantKey', 'woocommerce-4all' ),
               'type'              => 'text',
-              'description'       => __( 'Please enter your 4all MerchantKey. This is needed to process the payment.'),
+              'description'       => __( 'Please enter your 4all MerchantKey. This is needed to process the payment.', 'woocommerce-4all' ),
               'default'           => '',
               'custom_attributes' => array(
                 'required' => 'required',
@@ -150,7 +150,7 @@
             'environment' => array(
               'title'             => __( 'Server Endpoint', 'woocommerce-4all' ),
               'type'              => 'select',
-              'description'       => __( 'URL of the service that will be used to make calls.'),
+              'description'       => __( 'URL of the service that will be used to make calls.', 'woocommerce-4all' ),
               'default'           => 'https://gateway.homolog.4all.com/',
               'options' => array(
                 'https://gateway.homolog.4all.com/' => 'https://gateway.homolog.4all.com/',

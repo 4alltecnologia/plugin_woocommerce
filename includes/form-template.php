@@ -34,11 +34,11 @@
 ?>
 
 <p class="form-row">
-  <label><?=__('Name of the buyer (same as the card)', 'woocommerce-4all'); ?></label>
+  <label><?=__('Name of the card holder (same as the card)', 'woocommerce-4all'); ?></label>
   <input type="text" name="cardholderName" maxlength="200">
 </p>
 <p class="form-row">
-  <label><?=__('CPF of the buyer', 'woocommerce-4all'); ?></label>
+  <label><?=__('CPF of the bearer', 'woocommerce-4all'); ?></label>
   <input type="text" name="buyerDocument" maxlength="14">
 </p>
 <p class="form-row">
