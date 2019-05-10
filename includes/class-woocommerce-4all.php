@@ -151,9 +151,9 @@
               'title'             => __( 'Server Endpoint', 'woocommerce-4all' ),
               'type'              => 'select',
               'description'       => __( 'URL of the service that will be used to make calls.', 'woocommerce-4all' ),
-              'default'           => 'https://gateway.homolog.4all.com/',
+              'default'           => 'https://gateway.homolog-interna.4all.com/',
               'options' => array(
-                'https://gateway.homolog.4all.com/' => 'https://gateway.homolog.4all.com/',
+                'https://gateway.homolog-interna.4all.com/' => 'https://gateway.homolog-interna.4all.com/',
                 'https://gateway.api.4all.com/' => 'https://gateway.api.4all.com/'
               )
             ),
