@@ -1,11 +1,21 @@
 .payment_method_4all {
 
 }
+.payment_method_4all-bank-slip {
+
+}
+.payment_method_4all-bank-slip .form-row {
+  margin-bottom: 10px;
+}
+.payment_method_4all-bank-slip .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 .payment_method_4all .form-row {
   margin-bottom: 10px;
 }
 .payment_method_4all .form-row-installment {
-
+  margin-bottom: 0px !important;
 }
 .payment_method_4all .form-row-installment select {
   border: 1px solid #DDD;

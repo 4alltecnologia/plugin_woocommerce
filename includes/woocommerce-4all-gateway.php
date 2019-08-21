@@ -5,6 +5,7 @@
     function __construct($gatewaySettings) {
       $this->merchantKey = $gatewaySettings["merchantKey"];
       $this->environment = $gatewaySettings["environment"];
+      $this->paymentMode = $gatewaySettings["paymentMode"];
     }
 
     function request_4all($url, $body) {
@@ -33,15 +34,18 @@
     }
 
     public function paymentFlow_4all($metaData) {
-      $this->cardData = $metaData["cardData"];
-      $responseRequestVaultKey = $this->requestVaultKey_4all();
-      if ($responseRequestVaultKey["error"]) {
-        return $responseRequestVaultKey;
+      if ($this->paymentMode == 1) {   
+        $this->cardData = $metaData["cardData"];
+        $responseRequestVaultKey = $this->requestVaultKey_4all();
+        if ($responseRequestVaultKey["error"]) {
+          return $responseRequestVaultKey;
+        }
+        $responsePrepareCard = $this->prepareCard_4all($responseRequestVaultKey["accessKey"]);
+        if ($responsePrepareCard["error"]) {
+          return $responsePrepareCard;
+        }
       }
-      $responsePrepareCard = $this->prepareCard_4all($responseRequestVaultKey["accessKey"]);
-      if ($responsePrepareCard["error"]) {
-        return $responsePrepareCard;
-      }
+
       $responseCreateTransaction = $this->createTransaction_4all($responsePrepareCard, $metaData);
       return $responseCreateTransaction;
     }
@@ -85,18 +89,26 @@
     function createTransaction_4all($cardCredential, $metaData)
     {
       try {
+        $paymentMethods = [
+          "amount" => $metaData["total"],
+          "paymentMode" => $this->paymentMode,
+        ];
+
+        if ($this->paymentMode == 1) {
+          $paymentMethods["cardNonce"] = $cardCredential["cardNonce"];
+          $paymentMethods["cardBrandId"] = $cardCredential["brandId"];
+          $paymentMethods["installmentType"] = $metaData["installments"] > 1 ? 2 : 1;
+          $paymentMethods["installments"] = $metaData["installments"];
+        } else {
+          $paymentMethods["paymentSlip"] = $metaData["paymentSlip"];
+        }
+
         $body = array(
           "merchantKey" => $this->merchantKey,
           "amount" => $metaData["total"],
           "metaId" => $metaData["metaId"],
           "overwriteMetaId" => true,
-          "paymentMethod" => 
-            [[
-              "cardNonce" => $cardCredential["cardNonce"],
-              "cardBrandId" => $cardCredential["brandId"],
-              "amount" => $metaData["total"],
-              "installment" => (int)$metaData["installment"]
-            ]],
+          "paymentMethod" => [$paymentMethods],
           "autoCapture" => true
         );
 
@@ -113,8 +125,17 @@
           );
         }
 
+        if ($metaData["customer"]["neighborhood"]) {
+          $body["customerInfo"]["neighborhood"] = $metaData["customer"]["neighborhood"];
+        }
+
+        if ($metaData["customer"]["number"]) {
+          $body["customerInfo"]["number"] = $metaData["customer"]["number"];
+        }
+
         $response = $this->request_4all('createTransaction', $body);
-        if ($response["status"] !== 4) {
+
+        if ($response["status"] !== 4 && $response["status"] !== 19 && $response["status"] !== 12) {
           if ($response["status"] === 0 || $response["status"] === 2 || $response["status"] === 3) {
 
             if ($response["status"] === 3) {
