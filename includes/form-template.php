@@ -1,11 +1,11 @@
-<?php 
+<?php
   include_once 'woocommerce-4all-gateway.php';
 
   $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
   $paymentMethods = $gateway_4all->getPaymentMethods_4all();
   $nonePaymentMethods = false; //variavel para o caso do merchant ainda nao ter nenhuma affiliation cadastrada
 
-  if ($paymentMethods) {
+  if ($paymentMethods["resume"]) {
     $brandsList = [];
 
     //a ordem das imagens esta de acordo com os id's retornados do gateway correspondendo a imagem
@@ -30,7 +30,6 @@
   } else {
     $nonePaymentMethods = true;
   }
-
 ?>
 
 <p class="form-row">
@@ -43,7 +42,7 @@
 </p>
 <p class="form-row">
   <label><?=__('Card number', 'woocommerce-4all' ); ?></label>
-  <input type="text" name="cardNumber" maxlength="200" <?php if ($nonePaymentMethods) { echo 'class="disabled" disabled'; } ?>>
+  <input type="text" name="cardNumber" maxlength="19" <?php if ($nonePaymentMethods) { echo 'class="disabled" disabled'; } ?>>
 </p>
 <input type="hidden" id="brandsList" value="<?php echo $brandsListString; ?>">
 <div class='form-row-brands'>
@@ -63,7 +62,7 @@
 </p>
 <p class="form-row">
   <label><?=__('Security code', 'woocommerce-4all' ); ?></label>
-  <input type="text" name="securityCode" maxlength="200">
+  <input type="text" name="securityCode" maxlength="4">
 </p>
 
 <p class="form-row form-row-installment">
@@ -73,11 +72,16 @@
   <?php
     $minInstallment = $paymentMethods['resume']['minInstallments'];
     $maxInstallments = $paymentMethods['resume']['maxInstallments'];
+    $total = WC()->cart->total;
     
     for (;$minInstallment<=$maxInstallments;$minInstallment++) {
-      echo '<option value="'.$minInstallment.'">'.$minInstallment.'</option>';
+      $value = number_format($total / $minInstallment, 2, ',', '.');
+      $phrase = $minInstallment . 'x - R$ ' . $value;
+
+      echo '<option value="'.$minInstallment.'">'.$phrase.'</option>';
     }
 
   ?>
   </select>
 </p>
+<p><?= __('&#9679; Approximated values', 'woocommerce-4all'); ?></p>

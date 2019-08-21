@@ -70,6 +70,7 @@ var $ = jQuery;
   var expirationSelector = '.payment_method_4all [name=expirationDate]';
   var cardNumberSelector = '.payment_method_4all [name=cardNumber]';
   var buyerDocument = '.payment_method_4all [name=buyerDocument]';
+  var buyerDocumentBankSlip = '.payment_method_4all-bank-slip [name=buyerDocumentBankSlip]';
   var errorCardNumber = false;
 
   $context.on('keypress', expirationSelector, function(event) {
@@ -78,6 +79,11 @@ var $ = jQuery;
   });
 
   $context.on('keypress', buyerDocument, function(event) {
+    var v = destroyDocumentMask_4all(event.target.value);
+    event.target.value = createDocumentMask_4all(v);
+  });
+
+  $context.on('keypress', buyerDocumentBankSlip, function(event) {
     var v = destroyDocumentMask_4all(event.target.value);
     event.target.value = createDocumentMask_4all(v);
   });

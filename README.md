@@ -14,28 +14,28 @@
 ## Descrição
 Adicione a 4all como método de pagamento em sua loja WooCommerce.
 
-A [4all](https://4all.com)  é um gateway simples de pagamento brasileiro desenvolvido pela empresa de mesmo nome.
+A [4all](https://4all.com) é um gateway de pagamento brasileiro desenvolvido pela empresa de mesmo nome.
 
 O plugin 4all for WooCommerce foi desenvolvido pela própria 4all com o intuito de permitir que e-commerces possam passar a usar a 4all em seus sites.
 
 A 4all para WooCommerce é um checkout direto que será adicionado na tela de pagamento para que seus clientes façam o pagamento diretamente da sua página passando para nós só as informações principais do pagamento.
 
 ### Compatibilidade
-Compatível desde a versão 2.3.x até 2.6.x do WooCommerce.
+Compatível desde a versão 2.3.x até 3.7.x do WooCommerce.
 
 ### Instalação
-Confira o nosso guia de instalação e configuração da 4all na aba [Installation](http://wordpress.org/plugins/4all/installation/).
+Confira o nosso guia de instalação e configuração da 4all na aba [Installation](https://wordpress.org/plugins/pagamentos-digitais-4all/#installation).
 
 ### Dúvidas?
 
 Você pode esclarecer suas dúvidas usando:
 
--   Criando um tópico no  [fórum de ajuda do WordPress](http://wordpress.org/support/plugin/4all).
--   Criando um tópico no  [fórum do Github](#).
+-   Criando um tópico no [fórum de ajuda do WordPress](https://wordpress.org/support/plugin/pagamentos-digitais-4all/).
+-   Criando um tópico no [fórum do Github](https://github.com/4alltecnologia/plugin_woocommerce/issues).
 
 ### Colaborar
 
-Você pode contribuir com código-fonte em nossa página no  [GitHub](#). Caso não saiba por onde começar, [aqui](https://www.youtube.com/watch?v=z8rLQsoUeHc) você pode encontrar um vídeo tutorial para ajuda-lo a instalar o Wordpress no seu **localhost**.
+Você pode contribuir com código-fonte em nossa página no [GitHub](https://github.com/4alltecnologia/plugin_woocommerce). Caso não saiba por onde começar, [aqui](https://www.youtube.com/watch?v=z8rLQsoUeHc) você pode encontrar um vídeo tutorial para ajuda-lo a instalar o Wordpress no seu **localhost**.
 
 ## Instalação
 
@@ -46,17 +46,15 @@ Você pode contribuir com código-fonte em nossa página no  [GitHub](#). Caso n
 
 ### Requerimentos:
 
- - É necessário possuir uma conta no  [4all](https://4all.com).
- - Ter instalado o plugin [WooCommerce](http://wordpress.org/plugins/woocommerce/).
+ - É necessário possuir uma conta na [4all](https://4all.com).
+ - Ter instalado o plugin [WooCommerce](https://wordpress.org/plugins/woocommerce/).
 
 ### Configurações do Plugin:
 
-Com o plugin instalado acesse o admin do WordPress e entre em "WooCommerce" > "Settings" > "Checkout" e configure as opção "Pagamentos Digitais 4all" e habilite.
+Com o plugin instalado acesse o admin do WordPress e entre em "WooCommerce" > "Settings" > "Checkout", nessa página você encontrará duas opções, "4all - Cartão de crédito" e "4all - Boleto" entre em cada um, habilite e configure.
 
-Preencha as opção de  **MerchantKey**  que você receber por e-mail após se cadastrar na 4all.
+Preencha as opção de  **Chave do estabelicimento** com a merchantKey que você recebeu por e-mail após se cadastrar na 4all. Terão duas opções, uma na parte de integração, esta será a chave para acessar o ambiente de produção e a na parte de sandbox, esta será para acessar o servidor de homologação (testes).
 
-Você também terá que escolher o **Server Endpoint**, ele permite você fazer as chamadas para o ambiente de produção ou para o de homologação caso queira fazer alguns testes.
+Caso queira fazer alguns testes você pode ativar o modo de sandbox, este irá enviar todas as transações feitas pelo plugin pro ambiente de testes.
 
 Pronto, sua loja já pode receber pagamentos pela 4all.
-
-Observação: É aconselhavel não esconder as imagens da página de checkout, pois para disponibilizar um layout mais agradavel, nós apresentamos apenas nosso logo nessa página.

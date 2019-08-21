@@ -34,21 +34,23 @@
     if (!class_exists('WC_Payment_Gateway')) return;
 
     include_once('includes/class-woocommerce-4all.php');
+    include_once('includes/class-woocommerce-bank-slip-4all.php');
   }
 
   add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'plugin_action_links' );
 
   function plugin_action_links( $links ) {
     $plugin_links   = array();
-    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Settings', 'woocommerce-4all' ) . '</a>';
+    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all' ) . '">' . __( 'Credit card settings', 'woocommerce-4all' ) . '</a>';
+    $plugin_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=4all-bank-slip' ) . '">' . __( 'Bank slip settings', 'woocommerce-4all' ) . '</a>';
 
     return array_merge( $plugin_links, $links );
 	}
-  
 
   function woocommerce_4all_add_gateway($methods)
   {
     $methods[] = 'WC_Gateway_4all';
+    $methods[] = 'WC_Bank_Slip_4all';
     return $methods;
   }
 
@@ -57,7 +59,7 @@
     $styleUrl = plugins_url( $basePluginName . '/assets/css/frontend/4all-style.css');
     wp_enqueue_style( 'woocommerce_4all_style', $styleUrl);
   }
-  
+
   function woocommerce_4all_add_js() {
     $basePluginName = plugin_basename(plugin_dir_path( __FILE__ ));
     $scriptUrl = plugins_url( $basePluginName . '/assets/js/4all-scripts.js');
