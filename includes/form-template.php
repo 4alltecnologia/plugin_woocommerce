@@ -73,14 +73,23 @@
     $minInstallment = $paymentMethods['resume']['minInstallments'];
     $maxInstallments = $paymentMethods['resume']['maxInstallments'];
     $total = WC()->cart->total;
-    
+
     for (;$minInstallment<=$maxInstallments;$minInstallment++) {
-      $value = number_format($total / $minInstallment, 2, ',', '.');
-      $phrase = $minInstallment . 'x - R$ ' . $value;
+      $value = $total / $minInstallment;
+      $phrase = $minInstallment . 'x - R$ ';
+
+      if ($minInstallment >= $this->interestInstallment && $this->interestInstallment > 0) {
+        $interest = ($value * $this->interestRate) / 100;
+        $value += $interest;
+        $phrase = $phrase . number_format($value, 2, ',', '.');
+        $phrase = $phrase . __(' interest of ', 'woocommerce-4all');
+        $phrase = $phrase . number_format($interest, 2, ',', '.');
+      } else {
+        $phrase = $phrase . number_format($value, 2, ',', '.');
+      }
 
       echo '<option value="'.$minInstallment.'">'.$phrase.'</option>';
     }
-
   ?>
   </select>
 </p>

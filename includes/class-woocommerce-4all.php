@@ -17,6 +17,19 @@
         $this->title = $this->settings['title'];
         $this->enabled = $this->settings['enabled'];
         $this->description = $this->settings['description'];
+        $this->interestInstallment = (int) $this->settings['interestInstallment'];
+        $this->interestRate = (float) number_format(
+            preg_replace(
+              '/([^.0-9])/',
+              '',
+              str_replace(
+                ',',
+                '.',
+                sanitize_text_field($this->settings['interestRate'])
+              )
+            ),
+            2
+        );
         $this->gatewaySettings = [
           "merchantKey" => $this->settings['enabledHomolog'] == 'yes' ? $this->settings['homologMerchantKey'] : $this->settings['merchantKey'],
           "environment" => $this->settings['enabledHomolog'] == 'yes' ? 'https://gateway.homolog-interna.4all.com/' : 'https://gateway.api.4all.com/',
@@ -165,6 +178,43 @@
               ),
             ),
 
+            'interest' => array(
+                'title'       => __( 'Interest Settings', 'woocommerce-4all' ),
+                'type'        => 'title',
+                'description' => '',
+            ),
+
+            'interestInstallment' => array(
+              'title'             => __( 'Interest installments', 'woocommerce-4all' ),
+              'type'              => 'select',
+              'description'       => __( 'From how many installments the interest will be applied.', 'woocommerce-4all' ),
+              'desc_tip'    => true,
+              'default'           => '0',
+              'options' => array(
+                '0' => __( 'None', 'woocommerce-4all' ),
+                '1' => '1',
+                '2' => '2',
+                '3' => '3',
+                '4' => '4',
+                '5' => '5',
+                '6' => '6',
+                '7' => '7',
+                '8' => '8',
+                '9' => '9',
+                '10' => '10',
+                '11' => '11',
+                '12' => '12',
+              )
+            ),
+
+            'interestRate' => array(
+              'title'             => __( 'Interest rate', 'woocommerce-4all' ),
+              'type'              => 'text',
+              'description'       => __( 'Percentage interest rate that will be applied in the installments. Example: 1.10', 'woocommerce-4all' ),
+              'desc_tip'          => true,
+              'default'           => '0',
+            ),
+
             'sandbox' => array(
                 'title'       => __( 'Sandbox Settings', 'woocommerce-4all' ),
                 'type'        => 'title',
@@ -242,11 +292,19 @@
             "cardNumber" => sanitize_text_field($_REQUEST["cardNumber"]),
             "expirationDate" => sanitize_text_field($_REQUEST["expirationDate"]),
             "securityCode" => sanitize_text_field($_REQUEST["securityCode"])
-            ],
+          ],
           "installments" => (int)sanitize_text_field($_REQUEST['installment']),
-          "total" => (int)$order->get_total() * 100,
+          "total" => $order->get_total() * 100,
           "metaId" => "" . $order_id
-          ];
+        ];
+
+        if ($this->interestInstallment > 0 && $this->interestRate > 0 && $metaData['installments'] >= $this->interestInstallment) {
+          $metaData["interestRules"] = [[
+            "min" => $this->interestInstallment,
+            "max" => 1 + $metaData['installments'], // Precaucao, pois o max nao pode ser igual ao minimo
+            "percentual" => $this->interestRate,
+          ]];
+        }
 
         $findToReplace = array('.', '-');
         $metaData["customer"] = $this->add_customer_4all();
