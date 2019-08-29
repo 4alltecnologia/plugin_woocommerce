@@ -112,6 +112,10 @@
           "autoCapture" => true
         );
 
+        if ($metaData["interestRules"]) {
+          $body["interestRules"] = $metaData["interestRules"];
+        }
+
         if ($metaData["customer"]) {
           $body["customerInfo"] = array(
             "fullName" => $metaData["customer"]["fullName"],
