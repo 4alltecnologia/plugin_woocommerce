@@ -227,7 +227,7 @@
         $gateway_4all = new woocommerce_4all_gateway($this->gatewaySettings);
 
         $metaData = [
-          "total" => (int)$order->get_total() * 100,
+          "total" => round($order->get_total() * 100),
           "metaId" => "" . $order_id,
           "customer" => $this->add_customer_4all(),
           "paymentSlip" => $this->paymentSlip

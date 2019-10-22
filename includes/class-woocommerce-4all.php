@@ -294,7 +294,7 @@
             "securityCode" => sanitize_text_field($_REQUEST["securityCode"])
           ],
           "installments" => (int)sanitize_text_field($_REQUEST['installment']),
-          "total" => $order->get_total() * 100,
+          "total" => round($order->get_total() * 100),
           "metaId" => "" . $order_id
         ];
 
