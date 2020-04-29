@@ -289,8 +289,8 @@
           "cardData" => [
             "cardholderName" => sanitize_text_field($_REQUEST["cardholderName"]),
             "buyerDocument" => sanitize_text_field($_REQUEST["buyerDocument"]),
-            "cardNumber" => sanitize_text_field($_REQUEST["cardNumber"]),
-            "expirationDate" => sanitize_text_field($_REQUEST["expirationDate"]),
+            "cardNumber" => str_replace(' ', '', sanitize_text_field($_REQUEST["cardNumber"])),
+            "expirationDate" => str_replace('/', '', sanitize_text_field($_REQUEST["expirationDate"])),
             "securityCode" => sanitize_text_field($_REQUEST["securityCode"])
           ],
           "installments" => (int)sanitize_text_field($_REQUEST['installment']),
