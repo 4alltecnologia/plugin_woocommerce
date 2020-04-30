@@ -4,7 +4,7 @@
    * Plugin URI:  https://github.com/4alltecnologia/plugin_woocommerce.git
    * Description: Includes 4all as a payment gateway to WooCommerce.
    * Author:      4all, Thiago Siqueira
-   * Version:     2.1.1
+   * Version:     2.1.2
    * License:     GPLv2 or later
    * Text Domain: pagamentos-digitais-4all
    * Domain Path: /languages
